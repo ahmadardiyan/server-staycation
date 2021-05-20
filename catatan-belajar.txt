@@ -1,0 +1,56 @@
+A. NODE JS
+1. Road Map Node JS
+2. Intro Node JS
+- dikembangkan menggunakan teknologi V8 engine google chrome, sehingga code dapat di konversi ke bahasa mesin (assembly)
+- memiliki library server sendiri, sehingga tidak butuh nginx atau apache
+- memiliki event driven, non blocking, dan single threaded (alokasi threader)
+- tidak melakukan data buffering
+3. Tools
+- VS code
+- Node JS
+4. Install Node JS
+5. Menggunakan Node JS REPL
+6. Module build in, Module adalah library yang berisi function-function
+7. Module npm > npm init > package.json > install module
+8. Module buatan sendiri > create module > module exports
+
+B. EXPRESS JS WITH NODE JS
+1. Install Express JS
+- npm instal express --save
+2. Routing dan Install Nodemon (auto running server)
+3. Instal template engine EJS
+4. Parsing data
+
+C. MONGO DB
+1. Instal mongo db dan mongo compass
+
+D. MONGOOSE
+1. Mengenal mongoose dan create data
+a. install mongoose
+- npm install mongoose
+- documentaion : mongoosejs.com
+b. create data
+- .save(function(error)) = insert 1 data
+- .insertMulti(array, function(error)) = insert banyak data
+2. Membaca data mongoose
+- .find(function(error, data))
+3. Validasi
+- membuat validasi pada pembuatan model Schema 
+4. Update dan Delete data mongoose
+- .updateOne()
+- .deleteOne()
+5. Relation mongoose db
+
+E.ADMIN STAYCATION
+1. Schema staycation
+- membuat perancangan model schema berdasarkan design yang telah dibuat
+2. Setup project staycation
+- install express generator
+- create folder controllers, models, dan middleware
+3. Create model staycation
+- Install mongoose and create model
+- Create validation model
+4. Add template sbadmin2
+- npm install startbootstrap-sb-sdmin-2
+- konfigurasi static path untuk sbamin2 di app.js
+
