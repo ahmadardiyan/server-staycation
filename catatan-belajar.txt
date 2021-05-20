@@ -53,4 +53,5 @@ E.ADMIN STAYCATION
 4. Add template sbadmin2
 - npm install startbootstrap-sb-sdmin-2
 - konfigurasi static path untuk sbamin2 di app.js
-
+5. View admin dashboard
+- memecah template sbadmin2 (partials)
