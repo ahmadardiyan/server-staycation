@@ -61,3 +61,6 @@ b. dashboard admin
 - buat router admin
 - insert router admin ke app.js
 - lakukan langkah-langkah diatas untuk membuat menu yang lain  
+6.Fungsional admin dashboard
+a. koneksi ke database mongoose
+
