@@ -6,7 +6,7 @@ var logger = require('morgan');
 
 // import and connect to mongoose
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/myapp',{
+mongoose.connect('mongodb://localhost:27017/db_bwamern',{
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,

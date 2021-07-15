@@ -31,7 +31,7 @@ a. install mongoose
 - documentaion : mongoosejs.com
 b. create data
 - .save(function(error)) = insert 1 data
-- .insertMulti(array, function(error)) = insert banyak data
+- .insertMany(array, function(error)) = insert banyak data
 2. Membaca data mongoose
 - .find(function(error, data))
 3. Validasi
@@ -63,4 +63,7 @@ b. dashboard admin
 - lakukan langkah-langkah diatas untuk membuat menu yang lain  
 6.Fungsional admin dashboard
 a. koneksi ke database mongoose
-
+b. membuat modal form input category dan create data ke mongoose
+c. menampilkan data dengan metode find dan menambah icon update serta delete
+d. membuat modal update, mengintal method-override supaya dapat menggunakan methode PUT ("//url/?_method=PUT"), pada controller category melakukan findOne(_id: id) data kemudian jika ada datanya maka di-update kemudian di save()
+e. menghapus data menggunakan perintah remove()
