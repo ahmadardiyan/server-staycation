@@ -12,6 +12,10 @@ const bankSchema = new mongoose.Schema({
     nameAccount: {
         type: String,
         required: true
+    },
+    imageUrl: {
+        type: String,
+        required: true
     }
 });
 
