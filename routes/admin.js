@@ -12,7 +12,8 @@ router.delete('/category/:id',adminController.deleteCategory);
 
 // endpoint bank
 router.get('/bank',adminController.viewBank);
-router.post('/bank',upload, adminController.createBank);
+router.post('/bank', upload, adminController.createBank);
+router.put('/bank', upload, adminController.updateBank);
 
 router.get('/item',adminController.viewItem);
 router.get('/booking',adminController.viewBooking);

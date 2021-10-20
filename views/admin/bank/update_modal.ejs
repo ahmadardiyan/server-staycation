@@ -1,0 +1,45 @@
+<!-- Modal -->
+<div class="modal fade" id="update-modal" tabindex="-1" aria-labelledby="add-modal-label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="add-modal-label">Update Bank</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="/admin/bank?_method=PUT" method="POST" enctype="multipart/form-data">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control name" id="name" name="name" placeholder="Name" required>
+          </div>
+        </div> 
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="name">Bank Account</label>
+            <input type="text" class="form-control bank-account" id="bank-account" name="bankAccount" placeholder="Bank Account" required>
+          </div>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="name">Name Account</label>
+            <input type="text" class="form-control name-account" id="name-account" name="nameAccount" placeholder="Name Account" required>
+          </div>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="name">Image URL</label>
+            <input type="file" class="form-control image-url" id="image-url" name="image">
+            <span>select image to update data image</span>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <input type="hidden" class="id" name="id">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Add</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

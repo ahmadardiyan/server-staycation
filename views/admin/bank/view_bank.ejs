@@ -16,7 +16,8 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-4 text-gray-800">Category</h1>
+          <h1 class="h3 mb-4 text-gray-800">Bank</h1>
+          <%- include('../../partials/message.ejs')%>
 
           <%- include('table_bank') %>
         </div>
@@ -58,7 +59,24 @@
   </div>
 
   <%- include('add_modal') %>
+  <%- include('update_modal') %>
   <%- include('../../partials/js.ejs') %>
+
+  <script>
+    $('#dataTable').on('click', '.button-update', function() {
+      
+      let id = $(this).data("id");
+      let name = $(this).data("name");
+      let bankAccount = $(this).data("bankaccount");
+      let nameAccount = $(this).data("nameaccount");
+      
+      $('.id').val(id);
+      $('.name').val(name);
+      $('.bank-account').val(bankAccount);
+      $('.name-account').val(nameAccount);
+      $("#update-modal").modal('show');
+    });
+  </script>
 
 </body>
 
