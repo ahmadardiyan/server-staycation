@@ -18,7 +18,18 @@
           <!-- Page Heading -->
           <h1 class="h3 mb-4 text-gray-800">Category</h1>
 
-          <%- include('table_item') %>
+          <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+              <a class="nav-link active" id="show-item-tab" data-toggle="tab" href="#show-item" role="tab" aria-controls="show-item" aria-selected="true">Show Item</a>
+              <a class="nav-link" id="add-item-tab" data-toggle="tab" href="#add-item" role="tab" aria-controls="add-item" aria-selected="false">Add Item</a>
+            </div>
+          </nav>
+          <div class="tab-content" id="nav-tabContent">
+            <%- include('table_item.ejs') %>
+            <%- include('add_item.ejs') %>
+            <!-- <div class="tab-pane fade" id="add-item" role="tabpanel" aria-labelledby="add-item-tab">...</div> -->
+          </div>
+
         </div>
         <!-- /.container-fluid -->
 
@@ -60,5 +71,7 @@
   <%- include('../../partials/js.ejs')%>
 
 </body>
-
+<script>
+  CKEDITOR.replace( 'about' );
+</script>
 </html>
