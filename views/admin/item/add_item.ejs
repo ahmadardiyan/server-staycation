@@ -17,8 +17,10 @@
         <div class="form-group">
           <label for="name">Category</label>
           <select class="form-control" name="categoryId">
-            <option value="">-----value category----</option>
-            <option value="">-----value category----</option>
+            <option value="">-- Category --</option>
+            <% for (let i = 0; i < categories.length; i++) { %>
+              <option value="<%= categories[i].id %>"><%= categories[i].name %></option>
+            <% } %>
           </select>
         </div>
         <div class="form-group">
@@ -27,7 +29,7 @@
         </div>
         <div class="form-group">
           <label for="description">Descripition</label>
-          <textarea name="about" class="form-control"></textarea>
+          <textarea name="description" class="form-control"></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Save</button>
       </form>

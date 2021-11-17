@@ -33,7 +33,7 @@ const storage = multer.diskStorage({
   }
 });
 
-const upload = multer({
+const uploadSingle = multer({
   storage: storage,
   limits: { fileSize: 1000000 },
   fileFilter: function (req, file, cb) {
@@ -58,4 +58,4 @@ function checkFileType(file, cb) {
   }
 }
 
-module.exports = { uploadMultiple, upload };
+module.exports = { uploadMultiple, uploadSingle };
