@@ -189,24 +189,31 @@ module.exports = {
 		}
 	},
 	viewItem: async (req, res) => {
+		try {
+			const items = await Item.find()
+				.populate({path: `imageId`, select: `id imageUrl`})
+				.populate({path: `categoryId`, select:`id name`});
+			const categories = await Category.find();
+			const alertMessage = req.flash('alertMessage');
+			const alertStatus = req.flash('alertStatus');
+			const alert = {
+				message : alertMessage,
+				status : alertStatus
+			}
 
-		const items = await Item.find()
-			.populate({path: `imageId`, select: `id imageUrl`})
-			.populate({path: `categoryId`, select:`id name`});
-		const categories = await Category.find();
-		const alertMessage = req.flash('alertMessage');
-		const alertStatus = req.flash('alertStatus');
-		const alert = {
-			message : alertMessage,
-			status : alertStatus
+			res.render('admin/item/view_item', {
+				title : 'StayCation | Item',
+				categories,
+				alert,
+				items,
+				action: 'view'
+			});
+		} catch (error) {
+			req.flash('alertMessage', `${error.message}` );
+			req.flash('alertStatus', 'danger' );
+
+			res.redirect('/admin/item');
 		}
-
-		res.render('admin/item/view_item', {
-			title : 'StayCation | Item',
-			categories,
-			alert,
-			items
-		});
 	},
 	createItem: async (req, res) => {
 		try {
@@ -240,6 +247,36 @@ module.exports = {
 			}
 		} catch (error) {
 			// console.log(error);
+			req.flash('alertMessage', `${error.message}` );
+			req.flash('alertStatus', 'danger' );
+
+			res.redirect('/admin/item');
+		}
+	},
+	showImageItem: async (req, res) => {
+		try {
+			const {id} = req.params;
+			const items = await Item.findOne({_id: id})
+				.populate({path: `imageId`, select: `id imageUrl`});
+
+			// console.log(items.imageId);
+			
+			const alertMessage = req.flash('alertMessage');
+			const alertStatus = req.flash('alertStatus');
+			const alert = {
+				message : alertMessage,
+				status : alertStatus
+			}
+
+			res.render('admin/item/view_item', {
+				title : 'StayCation | Item',
+				alert,
+				items,
+				action: 'show-image'
+			});
+
+		} catch (error) {
+			console.log(error);
 			req.flash('alertMessage', `${error.message}` );
 			req.flash('alertStatus', 'danger' );
 

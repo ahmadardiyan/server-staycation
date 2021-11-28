@@ -19,6 +19,7 @@
           <h1 class="h3 mb-4 text-gray-800">Items</h1>
           <%- include('../../partials/message.ejs')%>
 
+          <% if (action == 'view') { %>
           <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
               <a class="nav-link active" id="show-item-tab" data-toggle="tab" href="#show-item" role="tab" aria-controls="show-item" aria-selected="true">Show Item</a>
@@ -30,6 +31,17 @@
             <%- include('add_item.ejs') %>
             <!-- <div class="tab-pane fade" id="add-item" role="tabpanel" aria-labelledby="add-item-tab">...</div> -->
           </div>
+          <% } else if (action == 'show-image') { %>
+            <nav>
+              <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <a class="nav-link active" id="show-image-tab" data-toggle="tab" href="#show-image" role="tab" aria-controls="show-image" aria-selected="true">Show Image Item</a>
+              </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+              <%- include('show_image_item.ejs') %>
+              <!-- <div class="tab-pane fade" id="add-item" role="tabpanel" aria-labelledby="add-item-tab">...</div> -->
+            </div>
+          <% } %>
 
         </div>
         <!-- /.container-fluid -->
