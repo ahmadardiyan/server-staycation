@@ -14,6 +14,28 @@
               <th>Aksi</th>
             </tr>
           </thead>
+          <tbody>
+            <% for (let i = 0; i < items.length; i++) { %>
+            <tr>
+              <td><%= i + 1 %></td>
+              <td><%= items[i].title %></td>
+              <td><%= items[i].price %></td>
+              <td><%= items[i].country %></td>
+              <td><%= items[i].city %></td>
+              <td>
+                <form action="/admin/items/<%= items[i].id %>?_method=DELETE" method="POST">
+                  <a href="#" type="button" class="btn btn-info btn-sm button-update"
+                    data-id="<%= items[i].id %>" data-name="<%= items[i].name %>"><i class="fas fa-image"></i></a>
+                  <a href="javascript:void()" type="button" class="btn btn-warning btn-sm button-update"
+                    data-id="<%= items[i].id %>" data-name="<%= items[i].name %>"><i class="fas fa-edit"></i></a>
+                  <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+                  <a href="#" type="button" class="btn btn-success btn-sm button-update"
+                  data-id="<%= items[i].id %>" data-name="<%= items[i].name %>"><i class="fas fa-plus"></i></a>
+                </form>
+              </td>
+            </tr>
+            <% } %>
+          </tbody>
         </table>
       </div>
     </div>

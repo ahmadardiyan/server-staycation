@@ -190,6 +190,9 @@ module.exports = {
 	},
 	viewItem: async (req, res) => {
 
+		const items = await Item.find()
+			.populate({path: `imageId`, select: `id imageUrl`})
+			.populate({path: `categoryId`, select:`id name`});
 		const categories = await Category.find();
 		const alertMessage = req.flash('alertMessage');
 		const alertStatus = req.flash('alertStatus');
@@ -201,7 +204,8 @@ module.exports = {
 		res.render('admin/item/view_item', {
 			title : 'StayCation | Item',
 			categories,
-			alert
+			alert,
+			items
 		});
 	},
 	createItem: async (req, res) => {
