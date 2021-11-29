@@ -283,6 +283,37 @@ module.exports = {
 			res.redirect('/admin/item');
 		}
 	},
+	editItem: async (req, res) => {
+		try {
+			const {id} = req.params;
+			const item = await Item.findOne({_id: id})
+				.populate({path: `imageId`, select: `id imageUrl`})
+				.populate({path: `categoryId`, select: `id name`});
+				
+			const categories = await Category.find();
+			const alertMessage = req.flash('alertMessage');
+			const alertStatus = req.flash('alertStatus');
+			const alert = {
+				message : alertMessage,
+				status : alertStatus
+			}
+
+			res.render('admin/item/view_item', {
+				title : 'StayCation | Edit Item',
+				alert,
+				item,
+				categories,
+				action: 'edit-item'
+			});
+
+		} catch (error) {
+			console.log(error);
+			req.flash('alertMessage', `${error.message}` );
+			req.flash('alertStatus', 'danger' );
+
+			res.redirect('/admin/item');
+		}
+	},
 	viewBooking: (req, res) => {
 		res.render('admin/booking/view_booking',{
 			title : 'StayCation | Booking'

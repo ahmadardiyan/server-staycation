@@ -41,7 +41,17 @@
               <%- include('show_image_item.ejs') %>
               <!-- <div class="tab-pane fade" id="add-item" role="tabpanel" aria-labelledby="add-item-tab">...</div> -->
             </div>
-          <% } %>
+          <% } else { %>
+            <nav>
+              <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <a class="nav-link active" id="edit-item-tab" data-toggle="tab" href="#edit-item" role="tab" aria-controls="edit-item" aria-selected="true">Edit Item</a>
+              </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+              <%- include('edit_item.ejs') %>
+              <!-- <div class="tab-pane fade" id="add-item" role="tabpanel" aria-labelledby="add-item-tab">...</div> -->
+            </div>
+          <% }%>
 
         </div>
         <!-- /.container-fluid -->
