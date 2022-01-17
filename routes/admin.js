@@ -22,6 +22,7 @@ router.get('/item/:id',adminController.showEditItem);
 router.get('/item/show-image/:id',adminController.showImageItem);
 router.get('/item/detail/:id',adminController.viewDetailItem);
 router.post('/item', uploadMultiple, adminController.createItem);
+router.post('/item/create-feature', uploadSingle, adminController.createFeature)
 router.put('/item/:id', uploadMultiple, adminController.updateItem);
 router.delete('/item/:id', adminController.deleteItem);
 

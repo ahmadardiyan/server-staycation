@@ -1,5 +1,6 @@
 const Category = require('../models/Category');
 const Bank = require('../models/Bank');
+const Feature = require('../models/Feature')
 const Item = require('../models/Item');
 const Image = require('../models/Image');
 const fs = require('fs-extra');
@@ -394,13 +395,44 @@ module.exports = {
 
 			res.render('admin/item/detail_item/view_detail_item', {
 				title : 'StayCation | Detail Item',
-				alert
+				alert,
+				itemId
 			});
 		} catch (error) {
 			req.flash('alertMessage', `${error.message}` );
 			req.flash('alertStatus', 'danger' );
 
 			res.redirect('/admin/item');
+		}
+	},
+	createFeature : async (req, res) => {
+		let { name, qty, itemId } = req.body;
+		try {
+			if (!req.file) {
+				req.flash('alertMessage', 'data image not found!' );
+				req.flash('alertStatus', 'dange' );
+				res.redirect(`/admin/item/detail/${itemId}`);
+			}
+
+			const feature = await Feature.create({
+				name,
+				qty,
+				itemId,
+				imageUrl : `images/${req.file.filename}`
+			})
+
+			const item = await Item.findOne({_id:itemId})
+			item.featureId.push({_id: feature._id})
+			await item.save()
+			req.flash('alertMessage', 'Success create feature!' );
+			req.flash('alertStatus', 'success' );
+			res.redirect(`/admin/item/detail/${itemId}`);
+		} catch(error) {
+
+			req.flash('alertMessage', `${error.message}` );
+			req.flash('alertStatus', 'danger' );
+
+			res.redirect(`/admin/item/detail/${itemId}`);
 		}
 	},
 	viewBooking: (req, res) => {
