@@ -4,7 +4,7 @@
     <div class="card-body">
       <div class="row">
         <div class="col-md-5">
-          <form action="/admin/item/create-feature" method="POST" enctype="multipart/form-data">
+          <form action="/admin/item/create/feature" method="POST" enctype="multipart/form-data">
             
               <div class="form-group">
                 <label for="name">Name</label>
@@ -46,7 +46,7 @@
                   <td>
                     <form action="/admin/features/<%= features[i].id %>?_method=DELETE" method="POST">
                       <a href="javascript:void()" type="button" class="btn btn-warning btn-sm button-update"
-                        data-id="<%= features[i].id %>" data-name="<%= features[i].name %>"><i class="fas fa-edit"></i></a>
+                        data-id="<%= features[i].id %>" data-itemid="<%= features[i].itemId %>" data-name="<%= features[i].name %>" data-qty="<%= features[i].qty %>"><i class="fas fa-edit"></i></a>
                       <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
                     </form>
                   </td>

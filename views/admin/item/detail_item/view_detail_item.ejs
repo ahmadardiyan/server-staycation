@@ -69,6 +69,7 @@
     </div>
   </div>
 
+  <%- include('update_modal_feature.ejs') %>
   <%- include('../../../partials/js.ejs')%>
 
 </body>
@@ -77,5 +78,21 @@
   //   $('#dataTable').dataTable()
   // })
   CKEDITOR.replace( 'about' );
+</script>
+
+<script>
+  $('#dataTable').on('click', '.button-update', function() {
+    
+    let id = $(this).data("id");
+    let name = $(this).data("name");
+    let qty = $(this).data("qty");
+    let itemId = $(this).data("itemid");
+    
+    $('.id').val(id);
+    $('.name').val(name);
+    $('.qty').val(qty);
+    $('.item-id').val(itemId);
+    $("#update-modal").modal('show');
+  });
 </script>
 </html>

@@ -20,11 +20,13 @@ router.delete('/bank/:id',adminController.deleteBank);
 router.get('/item',adminController.viewItem);
 router.get('/item/:id',adminController.showEditItem);
 router.get('/item/show-image/:id',adminController.showImageItem);
-router.get('/item/detail/:id',adminController.viewDetailItem);
 router.post('/item', uploadMultiple, adminController.createItem);
-router.post('/item/create-feature', uploadSingle, adminController.createFeature)
 router.put('/item/:id', uploadMultiple, adminController.updateItem);
 router.delete('/item/:id', adminController.deleteItem);
+
+router.get('/item/detail/:id',adminController.viewDetailItem);
+router.post('/item/create/feature', uploadSingle, adminController.createFeature)
+router.put('/item/update/feature', uploadSingle, adminController.updateFeature)
 
 router.get('/booking',adminController.viewBooking);
 
