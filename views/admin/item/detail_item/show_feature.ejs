@@ -12,7 +12,7 @@
               </div>
               <div class="form-group">
                 <label for="number">Qty</label>
-                <input type="text" class="form-control" id="bank-account" name="qty" placeholder="Qty" required>
+                <input type="text" class="form-control" id="features-account" name="qty" placeholder="Qty" required>
               </div>
               <div class="form-group">
                 <label for="name">Image URL</label>
@@ -35,6 +35,23 @@
                 </tr>
               </thead>
               <tbody>
+                <% for (let i = 0; i < features.length; i++) { %>
+                <tr>
+                  <td><%= i + 1 %></td>
+                  <td><%= features[i].name %></td>
+                  <td><%= features[i].qty %></td>
+                  <td>
+                    <img src="http://localhost:3000/public/<%= features[i].imageUrl %>" alt="imageUrl" height='70px' width='70px'>
+                  </td>
+                  <td>
+                    <form action="/admin/features/<%= features[i].id %>?_method=DELETE" method="POST">
+                      <a href="javascript:void()" type="button" class="btn btn-warning btn-sm button-update"
+                        data-id="<%= features[i].id %>" data-name="<%= features[i].name %>"><i class="fas fa-edit"></i></a>
+                      <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+                    </form>
+                  </td>
+                </tr>
+                <% } %>
               </tbody>
             </table>
           </div>

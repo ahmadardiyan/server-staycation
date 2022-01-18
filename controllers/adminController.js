@@ -383,7 +383,7 @@ module.exports = {
 			res.redirect('/admin/item');
 		}
 	},
-	viewDetailItem: (req, res) => {
+	viewDetailItem: async (req, res) => {
 		const itemId = req.params.id
 		try {
 			const alertMessage = req.flash('alertMessage');
@@ -393,10 +393,15 @@ module.exports = {
 				status : alertStatus
 			}
 
+			const features = await Feature.find({itemId: itemId})
+
+			console.log(features)
+
 			res.render('admin/item/detail_item/view_detail_item', {
 				title : 'StayCation | Detail Item',
 				alert,
-				itemId
+				itemId,
+				features
 			});
 		} catch (error) {
 			req.flash('alertMessage', `${error.message}` );
