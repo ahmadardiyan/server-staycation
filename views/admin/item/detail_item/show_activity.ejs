@@ -35,6 +35,23 @@
                 </tr>
               </thead>
               <tbody>
+                <% for (let i = 0; i < activities.length; i++) { %>
+                <tr>
+                  <td><%= i + 1 %></td>
+                  <td><%= activities[i].name %></td>
+                  <td><%= activities[i].type %></td>
+                  <td>
+                    <img src="http://localhost:3000/public/<%= activities[i].imageUrl %>" alt="imageUrl" height='70px' width='70px'>
+                  </td>
+                  <td>
+                    <form action="/admin/item/<%= itemId %>/activity/<%= activities[i].id %>?_method=DELETE" method="POST">
+                      <a href="javascript:void()" type="button" class="btn btn-warning btn-sm button-update"
+                        data-id="<%= activities[i].id %>" data-itemid="<%= activities[i].itemId %>" data-name="<%= activities[i].name %>" data-type="<%= activities[i].type %>"><i class="fas fa-edit"></i></a>
+                      <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+                    </form>
+                  </td>
+                </tr>
+                <% } %>
               </tbody>
             </table>
           </div>

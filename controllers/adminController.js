@@ -477,12 +477,17 @@ module.exports = {
 			const features = await Feature.find({
 				itemId: itemId
 			})
+			const activities = await Activity.find({
+				itemId: itemId
+			})
+
 
 			res.render('admin/item/detail_item/view_detail_item', {
 				title: 'StayCation | Detail Item',
 				alert,
 				itemId,
-				features
+				features,
+				activities
 			});
 		} catch (error) {
 			req.flash('alertMessage', `${error.message}`);
