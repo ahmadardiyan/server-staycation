@@ -573,6 +573,37 @@ module.exports = {
 			res.redirect(`/admin/item/detail/${itemId}`);
 		}
 	},
+	deleteFeature: async (req, res) => {
+		const {
+			id,
+			itemId
+		} = req.params;
+		try {
+			const feature = await Feature.findOne({
+				_id: id
+			});
+
+			const item = await Item.findOne({_id: itemId}).populate('featureId')
+			for(let value of item.featureId) {
+				if (value._id.toString() === feature._id.toString()){
+					item.featureId.pull({_id: feature._id})
+					await item.save()
+				}
+			}
+			fs.unlink(path.join(`public/${feature.imageUrl}`));
+			await feature.remove();
+
+			req.flash('alertMessage', 'Success delete data feature!');
+			req.flash('alertStatus', 'success');
+
+			res.redirect(`/admin/item/detail/${itemId}`);
+		} catch (error) {
+			req.flash('alertMessage', `${error.message}`);
+			req.flash('alertStatus', 'danger');
+
+			res.redirect(`/admin/item/detail/${itemId}`);
+		}
+	},
 	viewBooking: (req, res) => {
 		res.render('admin/booking/view_booking', {
 			title: 'StayCation | Booking'

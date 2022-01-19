@@ -44,7 +44,7 @@
                     <img src="http://localhost:3000/public/<%= features[i].imageUrl %>" alt="imageUrl" height='70px' width='70px'>
                   </td>
                   <td>
-                    <form action="/admin/features/<%= features[i].id %>?_method=DELETE" method="POST">
+                    <form action="/admin/item/<%= itemId %>/feature/<%= features[i].id %>?_method=DELETE" method="POST">
                       <a href="javascript:void()" type="button" class="btn btn-warning btn-sm button-update"
                         data-id="<%= features[i].id %>" data-itemid="<%= features[i].itemId %>" data-name="<%= features[i].name %>" data-qty="<%= features[i].qty %>"><i class="fas fa-edit"></i></a>
                       <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
