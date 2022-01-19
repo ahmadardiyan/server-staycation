@@ -69,18 +69,33 @@
     </div>
   </div>
 
+  <%- include('update_modal_activity.ejs') %>
   <%- include('update_modal_feature.ejs') %>
   <%- include('../../../partials/js.ejs')%>
 
 </body>
 <script>
   // $(document).ready(function (){
-  //   $('#dataTable').dataTable()
+  //   $('#dataTableActivity').dataTable()
   // })
   CKEDITOR.replace( 'about' );
 </script>
 
 <script>
+   $('#dataTableActivity').on('click', '.button-update', function() {
+    
+    let id = $(this).data("id");
+    let name = $(this).data("name");
+    let type = $(this).data("type");
+    let itemId = $(this).data("itemid");
+    
+    $('.id').val(id);
+    $('.name').val(name);
+    $('.type').val(type);
+    $('.item-id').val(itemId);
+    $("#update-modal").modal('show');
+  });
+
   $('#dataTable').on('click', '.button-update', function() {
     
     let id = $(this).data("id");
