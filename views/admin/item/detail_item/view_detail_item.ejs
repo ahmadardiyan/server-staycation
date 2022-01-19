@@ -79,10 +79,8 @@
   //   $('#dataTableActivity').dataTable()
   // })
   CKEDITOR.replace( 'about' );
-</script>
 
-<script>
-   $('#dataTableActivity').on('click', '.button-update', function() {
+  $('#dataTableActivity').on('click', '.button-update', function() {
     
     let id = $(this).data("id");
     let name = $(this).data("name");
@@ -93,8 +91,8 @@
     $('.name').val(name);
     $('.type').val(type);
     $('.item-id').val(itemId);
-    $("#update-modal").modal('show');
-  });
+    $("#update-modal-acivity").modal('show');
+  })
 
   $('#dataTable').on('click', '.button-update', function() {
     
@@ -108,6 +106,6 @@
     $('.qty').val(qty);
     $('.item-id').val(itemId);
     $("#update-modal").modal('show');
-  });
+  })
 </script>
 </html>
