@@ -1,3 +1,4 @@
+const Activity = require('../models/Activity');
 const Category = require('../models/Category');
 const Bank = require('../models/Bank');
 const Feature = require('../models/Feature')
@@ -598,6 +599,44 @@ module.exports = {
 
 			res.redirect(`/admin/item/detail/${itemId}`);
 		} catch (error) {
+			req.flash('alertMessage', `${error.message}`);
+			req.flash('alertStatus', 'danger');
+
+			res.redirect(`/admin/item/detail/${itemId}`);
+		}
+	},
+	createActivity: async (req, res) => {
+		let {
+			name,
+			type,
+			itemId
+		} = req.body;
+		try {
+			if (!req.file) {
+				req.flash('alertMessage', 'data image not found!');
+				req.flash('alertStatus', 'dange');
+				res.redirect(`/admin/item/detail/${itemId}`);
+			}
+
+			const activity = await Activity.create({
+				name,
+				type,
+				itemId,
+				imageUrl: `images/${req.file.filename}`
+			})
+
+			const item = await Item.findOne({
+				_id: itemId
+			})
+			item.activityId.push({
+				_id: activity._id
+			})
+			await item.save()
+			req.flash('alertMessage', 'Success create activity!');
+			req.flash('alertStatus', 'success');
+			res.redirect(`/admin/item/detail/${itemId}`);
+		} catch (error) {
+
 			req.flash('alertMessage', `${error.message}`);
 			req.flash('alertStatus', 'danger');
 
