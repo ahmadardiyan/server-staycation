@@ -19,12 +19,18 @@ module.exports = {
 				message: alertMessage,
 				status: alertStatus
 			}
-			res.render('index', {
-				alert,
-				title: 'StayCation | Sign In'
-			});
+
+			if (req.session.user == null || req.session.user == undefined) {
+				res.render('index', {
+					alert,
+					title: 'StayCation | Sign In'
+				});
+			} else {
+				res.redirect('/admin/dashboard')
+			}
+
 		} catch (error) {
-			res.render('admin/signin')
+			res.render('/admin/signin')
 		}
 	},
 	actionSignin: async (req, res) => {
@@ -46,9 +52,13 @@ module.exports = {
 				res.redirect('/admin/signin');
 			}
 
+			req.session.user = {
+				id: user.id,
+				username: user.username
+			}
 			res.redirect('/admin/dashboard')
 		} catch (error) {
-			res.render('admin/signin')
+			res.render('/admin/signin')
 		}
 	},
 	viewDashboard: (req, res) => {
