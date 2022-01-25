@@ -61,9 +61,14 @@ module.exports = {
 			res.render('/admin/signin')
 		}
 	},
+	actionSignout: async (req, res) => {
+		req.session.destroy()
+		res.redirect('/admin/signin')
+	},
 	viewDashboard: (req, res) => {
 		res.render('admin/dashboard/view_dashboard', {
-			title: 'StayCation | Dashboard'
+			title: 'StayCation | Dashboard',
+			user: req.session.user
 		});
 	},
 	viewCategory: async (req, res) => {
@@ -78,7 +83,8 @@ module.exports = {
 			res.render('admin/category/view_category', {
 				category,
 				alert,
-				title: 'StayCation | Category'
+				title: 'StayCation | Category',
+				user: req.session.user
 			});
 		} catch (error) {
 			res.render('admin/category');
@@ -162,7 +168,8 @@ module.exports = {
 			res.render('admin/bank/view_bank', {
 				title: 'StayCation | Bank',
 				alert,
-				bank
+				bank,
+				user: req.session.user
 			});
 		} catch (error) {
 			res.render('admin/bank');
@@ -286,7 +293,8 @@ module.exports = {
 				categories,
 				alert,
 				items,
-				action: 'view'
+				action: 'view',
+				user: req.session.user
 			});
 		} catch (error) {
 			req.flash('alertMessage', `${error.message}`);
@@ -373,7 +381,8 @@ module.exports = {
 				title: 'StayCation | Item',
 				alert,
 				items,
-				action: 'show-image'
+				action: 'show-image',
+				user: req.session.user
 			});
 
 		} catch (error) {
@@ -414,7 +423,8 @@ module.exports = {
 				alert,
 				item,
 				categories,
-				action: 'edit-item'
+				action: 'edit-item',
+				user: req.session.user
 			});
 
 		} catch (error) {
@@ -540,7 +550,8 @@ module.exports = {
 				alert,
 				itemId,
 				features,
-				activities
+				activities,
+				user: req.session.user
 			});
 		} catch (error) {
 			req.flash('alertMessage', `${error.message}`);

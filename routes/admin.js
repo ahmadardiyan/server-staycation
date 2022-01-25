@@ -6,6 +6,8 @@ const auth = require('../middlewares/auth')
 router.get('/signin', adminController.viewSignin)
 router.post('/signin', adminController.actionSignin)
 router.use(auth)
+
+router.get('/signout', adminController.actionSignout)
 router.get('/dashboard',adminController.viewDashboard);
 
 // endpoint category
