@@ -1,9 +1,11 @@
 const Activity = require('../models/Activity');
 const Category = require('../models/Category');
 const Bank = require('../models/Bank');
-const Feature = require('../models/Feature')
+const Booking = require('../models/Booking');
+const Feature = require('../models/Feature');
 const Item = require('../models/Item');
 const Image = require('../models/Image');
+const Member = require('../models/Member');
 const User = require('../models/Users');
 const bcrypt = require('bcryptjs')
 const fs = require('fs-extra');
@@ -30,7 +32,7 @@ module.exports = {
 			}
 
 		} catch (error) {
-			res.render('/admin/signin')
+			res.redirect('/admin/signin')
 		}
 	},
 	actionSignin: async (req, res) => {
@@ -58,7 +60,7 @@ module.exports = {
 			}
 			res.redirect('/admin/dashboard')
 		} catch (error) {
-			res.render('/admin/signin')
+			res.redirect('/admin/signin')
 		}
 	},
 	actionSignout: async (req, res) => {
@@ -87,7 +89,7 @@ module.exports = {
 				user: req.session.user
 			});
 		} catch (error) {
-			res.render('admin/category');
+			res.redirect('admin/category');
 		}
 	},
 	createCategory: async (req, res) => {
@@ -172,7 +174,7 @@ module.exports = {
 				user: req.session.user
 			});
 		} catch (error) {
-			res.render('admin/bank');
+			res.redirect('admin/bank');
 		}
 	},
 	createBank: async (req, res) => {
@@ -788,9 +790,24 @@ module.exports = {
 			res.redirect(`/admin/item/detail/${itemId}`);
 		}
 	},
-	viewBooking: (req, res) => {
-		res.render('admin/booking/view_booking', {
-			title: 'StayCation | Booking'
-		});
+	viewBooking: async (req, res) => {
+		try {
+			const booking = await Booking.find().populate('memberId').populate('bankId');
+			const alertMessage = req.flash('alertMessage');
+			const alertStatus = req.flash('alertStatus');
+			const alert = {
+				message: alertMessage,
+				status: alertStatus
+			}
+			
+			res.render('admin/booking/view_booking', {
+				title: 'StayCation | Booking',
+				booking,
+				alert,
+				user: req.session.user
+			});
+		} catch (error) {
+			res.redirect('/admin/booking')
+		}
 	}
 }

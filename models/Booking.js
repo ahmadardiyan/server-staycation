@@ -37,14 +37,14 @@ const bookingSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    memberId: [{
+    memberId: {
         type: ObjectId,
         ref: 'Member'
-    }],
-    bankId: [{
+    },
+    bankId: {
         type: ObjectId,
         ref: 'Bank'
-    }],
+    },
     payments: {
         proofPayment: {
             type: String,
