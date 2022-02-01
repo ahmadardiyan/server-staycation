@@ -1,0 +1,55 @@
+<div class="tab-pane fade show active" role="tabpanel" aria-labelledby="show-feature-tab">
+  <!-- DataTales Example -->
+  <div class="card shadow mb-4 mt-2">
+    <div class="card-header">
+      <a href="/admin/booking" class="btn btn-warning">Back</a>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-5">
+          <img src="http://localhost:3000/public/<%= booking.payments.prooofPayment %>" alt="imageUrl" width='100%' display='block'>
+          <% if (booking.payments.status == 'Process') {%>
+          <div class="row">
+            <div class="col align-items-center">
+              <form action="/admin/booking/<%= booking._id %>/confirm?_method=PUT" method="POST">
+                <button class="btn btn-success">
+                  <i class="fas fa-check"></i> Konfirmasi
+                </button>
+              </form>
+            </div>
+            <div class="col align-items-center">
+              <form action="/admin/booking/<%= booking._id %>/reject?_method=PUT" method="POST">
+                <button class="btn btn-danger">
+                  <i class="fas fa-times"></i> Tolak
+                </button>
+              </form>
+            </div>
+          </div>
+          <% } %>
+        </div>
+        <div class="col-md-7">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Nama Member</th>
+                  <th>Bank</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><%= booking.itemId.title %></td>
+                  <td><%= booking.memberId.firstName %> <%= booking.memberId.lastName %></td>
+                  <td><%= booking.payments.bankFrom %></td>
+                  <td>$ <%= booking.total %></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

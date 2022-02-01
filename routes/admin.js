@@ -39,5 +39,8 @@ router.delete('/item/:itemId/activity/:id', adminController.deleteActivity);
 router.delete('/item/:itemId/feature/:id', adminController.deleteFeature);
 
 router.get('/booking',adminController.viewBooking);
+router.get('/booking/:id',adminController.viewBookingById);
+router.put('/booking/:id/confirm',adminController.actionConfirmBooking);
+router.put('/booking/:id/reject',adminController.actionRejectBooking);
 
 module.exports = router;
