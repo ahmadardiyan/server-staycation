@@ -22,13 +22,14 @@ module.exports = {
         .limit(5)
         .populate({path: 'imageId', select: '_id imageUrl'})
 
-      const categories = await Category.find()
+      let categories = await Category.find()
         .select('_id name')
         .limit(3)
         .populate({
           path: 'itemId',
+          select: '_id title country city isPopular sumBooking imageId',
           perDocumentLimit: 4,
-          select: '_id title country city isPopular imageId',
+          options: {sort: { sumBooking: -1 }},
           populate: {
             path: 'imageId',
             select: '_id imageUrl',
@@ -36,13 +37,29 @@ module.exports = {
           }
         })
 
+      for (const category of categories) {
+        for (const [index, value] of category.itemId.entries()) {
+          const item = await Item.findOne({_id: value._id})
+          item.isPopular = false
+          
+          if (index == 0) {
+            item.isPopular = true
+          }
+
+          await item.save()
+        }
+      }
+      
       res.status(200).json({
         hero,
         mostPicked,
         categories
       })
     } catch {
-      console.log('gagal;')
+      console.log(error)
+      res.status(500).json({
+        message: error.message
+      })
     }
   }
 }
