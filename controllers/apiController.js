@@ -1,4 +1,5 @@
 const Activity = require('../models/Activity')
+const Bank = require('../models/Bank')
 const Booking = require('../models/Booking')
 const Category = require('../models/Category')
 const Item = require('../models/Item')
@@ -67,6 +68,40 @@ module.exports = {
         testimonial
       })
     } catch {
+      console.log(error)
+      res.status(500).json({
+        message: error.message
+      })
+    }
+  },
+  detailPage : async (req, res) => {
+    try {
+      const { id } = req.params
+      const item = await Item.findOne({_id: id})
+        .populate(({path: 'imageId', select: '_id imageUrl'}))
+        .populate(({path: 'featureId', select: '_id name qty imageUrl'}))
+        .populate(({path: 'activityId', select: '_id name type imageUrl'}))
+
+      const bank = await Bank.find().select('_id name bankAccount nameAccount imageUrl')
+
+      const testimonial = {
+        _id: "asd1293uasdads1",
+        imageUrl: "/images/testimonial2.jpg",
+        name: "Happy Family",
+        rate: 4.55,
+        content: "What a great trip with my family and I should try again next time soon ...",
+        familyName: "Angga",
+        familyOccupation: "Product Designer"
+      }
+
+      // console.log(item)
+      res.status(200).json({
+        item,
+        bank,
+        testimonial
+      })
+
+    } catch (error) {
       console.log(error)
       res.status(500).json({
         message: error.message
