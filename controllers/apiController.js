@@ -3,6 +3,7 @@ const Bank = require('../models/Bank')
 const Booking = require('../models/Booking')
 const Category = require('../models/Category')
 const Item = require('../models/Item')
+const Member = require('../models/Member')
 
 module.exports = {
   landingPage : async (req, res) => {
@@ -99,6 +100,102 @@ module.exports = {
         item,
         bank,
         testimonial
+      })
+
+    } catch (error) {
+      console.log(error)
+      res.status(500).json({
+        message: error.message
+      })
+    }
+  },
+  booking : async (req, res) => {
+    try {
+
+      const {
+        itemId,
+        firstName,
+        lastName,
+        email,
+        phone,
+        duration,
+        startDate,
+        endDate,
+        bankFrom,
+        accountHolder
+      } = req.body
+      
+      if (!req.file) {
+        return res.status(400).json({
+          message: 'file proof payment not found, please upload file!'
+        })
+      }
+
+      if (         
+        itemId === undefined ||
+        firstName === undefined ||
+        lastName === undefined ||
+        email === undefined ||
+        phone === undefined ||
+        duration === undefined ||
+        startDate === undefined ||
+        endDate === undefined ||
+        bankFrom === undefined ||
+        accountHolder === undefined
+        ) {
+          return res.status(400).json({
+            message: 'field is empty, please insert data'
+          })
+        }
+      
+      const item = await Item.findOne({_id: itemId})
+
+      if (!item) {
+        return res.status(404).json({
+          message: 'data item is not found'
+        })
+      }
+
+      item.sumBooking += 1
+      await item.save()
+
+      const member = await Member.create({
+        firstName,
+        lastName,
+        email,
+        phone
+      })
+
+      const invoice = Math.floor(1000000 + Math.random() * 9000000)
+
+      const total = item.price * duration
+      const tax = total * 0.10
+
+      const newBooking = {
+        startDate,
+        endDate,
+        invoice,
+        itemId: {
+          _id: item._id,
+          title: item.title,
+          price: item.price,
+          duration
+        },
+        total: total + tax,
+        memberId: member.id,
+        payments: {
+          proofPayment: `/images/${req.file.filename}`,
+          bankFrom,
+          status: 'Proses',
+          accountHolder
+        }
+      }
+
+      const booking = await Booking.create(newBooking)
+
+      return res.status(200).json({
+        message: 'insert data successfuly',
+        booking
       })
 
     } catch (error) {
