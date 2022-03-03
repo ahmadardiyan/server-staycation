@@ -41,7 +41,7 @@
                   <td><%= activities[i].name %></td>
                   <td><%= activities[i].type %></td>
                   <td>
-                    <img src="https://ardiyan-admin-staycation.herokuapp.com/public/<%= activities[i].imageUrl %>" alt="imageUrl" height='70px' width='70px'>
+                    <img src="https://ardiyan-admin-staycation.herokuapp.com/<%= activities[i].imageUrl %>" alt="imageUrl" height='70px' width='70px'>
                   </td>
                   <td>
                     <form action="/admin/item/<%= itemId %>/activity/<%= activities[i].id %>?_method=DELETE" method="POST">
